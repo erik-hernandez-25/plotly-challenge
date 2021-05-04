@@ -196,9 +196,9 @@ function setPlot(id) {
         // plot the bubble chat to the appropriate div
         Plotly.newPlot('bubble', dataBub, layoutBub);
 
-        // ----------------------------------
+        
         // PLOT GAUGE CHART (OPTIONAL)
-        // ----------------------------------
+        
 
         // if wfreq has a null value, make it zero for calculating pointer later
         if (wfreq == null) {
@@ -208,28 +208,28 @@ function setPlot(id) {
         // create an indicator trace for the gauge chart
         var traceGauge = {
             domain: { x: [0, 1], y: [0, 1] },
-            value: wfreq,
+            value: parseFloat(wfreq),
             type: "indicator",
             mode: "gauge",
             gauge: {
                 axis: {
-                    range: [0, 9],
+                    range: [null, 9],
                     tickmode: 'linear',
                     tickfont: {
-                        size: 15
+                        size: 14
                     }
                 },
-                bar: { color: 'rgba(8,29,88,0)' }, // making gauge bar transparent since a pointer is being used instead
+                bar: { color: 'rgba(233,233,233,1)' }, // making gauge bar transparent since a pointer is being used instead
                 steps: [
-                    { range: [0, 1], color: 'rgb(255,255,217)' },
-                    { range: [1, 2], color: 'rgb(237,248,217)' },
-                    { range: [2, 3], color: 'rgb(199,233,180)' },
-                    { range: [3, 4], color: 'rgb(127,205,187)' },
-                    { range: [4, 5], color: 'rgb(65,182,196)' },
-                    { range: [5, 6], color: 'rgb(29,145,192)' },
-                    { range: [6, 7], color: 'rgb(34,94,168)' },
-                    { range: [7, 8], color: 'rgb(37,52,148)' },
-                    { range: [8, 9], color: 'rgb(8,29,88)' }
+                    { range: [0, 1], color: 'rgb(7,33,70)' },
+                    { range: [1, 2], color: 'rgb(0,68,129)' },
+                    { range: [2, 3], color: 'rgb(91,190,255)' },
+                    { range: [3, 4], color: 'rgb(2,132,132)' },
+                    { range: [4, 5], color: 'rgb(45,204,205)' },
+                    { range: [5, 6], color: 'rgb(72,174,100)' },
+                    { range: [6, 7], color: 'rgb(216,190,117)' },
+                    { range: [7, 8], color: 'rgb(173,83,161)' },
+                    { range: [8, 9], color: 'rgb(247,137,59)' }
                 ]
             }
         };
