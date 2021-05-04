@@ -75,10 +75,7 @@ function setPlot(id) {
 
         }); // close forEach
 
-        // --------------------------------------------------
-        // RETRIEVE DATA FOR PLOTTING CHARTS
-        // --------------------------------------------------
-
+        
         // filter the samples for the ID chosen
         var individualSample = data.samples.filter(sample => sample.id == id)[0];
 
@@ -103,14 +100,14 @@ function setPlot(id) {
                     // case
                 default:
                     break;
-            } // close switch statement
+            } 
 
-        }); // close forEach
+        }); 
 
         // slice and reverse the arrays to get the top 10 values, labels and IDs
         var topOtuIds = otuIds[0].slice(0, 10).reverse();
-        var topOtuLabels = otuLabels[0].slice(0, 10).reverse();
-        var topSampleValues = sampleValues[0].slice(0, 10).reverse();
+        var labels = otuLabels[0].slice(0, 10).reverse();
+        var sampleValues = sampleValues[0].slice(0, 10).reverse();
 
         // use the map function to store the IDs with "OTU" for labelling y-axis
         var topOtuIdsFormatted = topOtuIds.map(otuID => "OTU " + otuID);
@@ -121,13 +118,13 @@ function setPlot(id) {
 
         // create a trace
         var traceBar = {
-            x: topSampleValues,
+            x: sampleValues,
             y: topOtuIdsFormatted,
-            text: topOtuLabels,
+            text: labels,
             type: 'bar',
             orientation: 'h',
             marker: {
-                color: 'rgb(29,145,192)'
+                color: 'rgb(142,124,195)'
             }
         };
 
