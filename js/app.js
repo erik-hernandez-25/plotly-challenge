@@ -47,9 +47,9 @@ function setPlot(id) {
     // read in the JSON data
     d3.json("data/samples.json").then((data => {
 
-        // ----------------------------------
+
         // POPULATE DEMOGRAPHICS TABLE
-        // ----------------------------------
+
 
         // filter the metadata for the ID chosen
         var metadata = data.metadata.filter(participant => participant.id == id)[0];
@@ -112,9 +112,9 @@ function setPlot(id) {
         // use the map function to store the IDs with "OTU" for labelling y-axis
         var topOtuIdsFormatted = topOtuIds.map(otuID => "OTU " + otuID);
 
-        // ----------------------------------
+
         // PLOT BAR CHART
-        // ----------------------------------
+
 
         // create a trace
         var traceBar = {
@@ -124,38 +124,35 @@ function setPlot(id) {
             type: 'bar',
             orientation: 'h',
             marker: {
-                color: 'rgb(142,124,195)'
+                color: 'rgb(77, 191, 254)'
             }
         };
 
         // create the data array for plotting
         var dataBar = [traceBar];
 
-        // define the plot layout
+        // create layout variable to set plots layout
         var layoutBar = {
-            height: 500,
-            width: 600,
-            font: {
-                family: 'Quicksand'
-            },
-            hoverlabel: {
-                font: {
-                    family: 'Quicksand'
-                }
-            },
+           
             title: {
-                text: `<b>Top OTUs for Test Subject ${id}</b>`,
+                text: `<b>Top 10 OTUs ${id}</b>`,
                 font: {
                     size: 18,
-                    color: 'rgb(34,94,168)'
+                    color: 'rgb(15,76,129)'
                 }
             },
             xaxis: {
                 title: "<b>Sample values<b>",
-                color: 'rgb(34,94,168)'
+                color: 'rgb(15,76,129)'
             },
             yaxis: {
                 tickfont: { size: 14 }
+            },
+            margin: {
+                l: 100,
+                r: 100,
+                t: 100,
+                b: 30
             }
         }
 
@@ -163,9 +160,9 @@ function setPlot(id) {
         // plot the bar chart to the "bar" div
         Plotly.newPlot("bar", dataBar, layoutBar);
 
-        // ----------------------------------
-        // PLOT BUBBLE CHART
-        // ----------------------------------
+ 
+        //  BUBBLE CHART
+       
 
         // create trace
         var traceBub = {
@@ -185,21 +182,13 @@ function setPlot(id) {
 
         // define the plot layout
         var layoutBub = {
-            font: {
-                family: 'Quicksand'
-            },
-            hoverlabel: {
-                font: {
-                    family: 'Quicksand'
-                }
-            },
             xaxis: {
                 title: "<b>OTU Id</b>",
-                color: 'rgb(34,94,168)'
+                color: 'rgb(15,76,129)'
             },
             yaxis: {
                 title: "<b>Sample Values</b>",
-                color: 'rgb(34,94,168)'
+                color: 'rgb(15,76,129)'
             },
             showlegend: false,
         };
