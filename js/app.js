@@ -118,6 +118,7 @@ function setPlot(id) {
 
         // create a trace
         var traceBar = {
+            height: 1000,
             x: sampleValues,
             y: topOtuIdsFormatted,
             text: labels,
@@ -197,127 +198,7 @@ function setPlot(id) {
         Plotly.newPlot('bubble', dataBub, layoutBub);
 
         
-        // PLOT GAUGE CHART (OPTIONAL)
         
-
-        // if wfreq has a null value, make it zero for calculating pointer later
-        if (wfreq == null) {
-            wfreq = 0;
-        }
-
-        // create an indicator trace for the gauge chart
-        var traceGauge = {
-            domain: { x: [0, 1], y: [0, 1] },
-            value: parseFloat(wfreq),
-            type: "indicator",
-            mode: "gauge",
-            gauge: {
-                axis: {
-                    range: [null, 9],
-                    tickmode: 'linear',
-                    tickfont: {
-                        size: 14
-                    }
-                },
-                bar: { color: 'rgba(233,233,233,1)' }, // making gauge bar transparent since a pointer is being used instead
-                steps: [
-                    { range: [0, 1], color: 'rgb(7,33,70)' },
-                    { range: [1, 2], color: 'rgb(0,68,129)' },
-                    { range: [2, 3], color: 'rgb(91,190,255)' },
-                    { range: [3, 4], color: 'rgb(2,132,132)' },
-                    { range: [4, 5], color: 'rgb(45,204,205)' },
-                    { range: [5, 6], color: 'rgb(72,174,100)' },
-                    { range: [6, 7], color: 'rgb(216,190,117)' },
-                    { range: [7, 8], color: 'rgb(173,83,161)' },
-                    { range: [8, 9], color: 'rgb(247,137,59)' }
-                ]
-            }
-        };
-
-        // determine angle for each wfreq segment on the chart
-        var angle = (wfreq / 9) * 180;
-
-        // calculate end points for triangle pointer path
-        var degrees = 180 - angle,
-            radius = .8;
-        var radians = degrees * Math.PI / 180;
-        var x = radius * Math.cos(radians);
-        var y = radius * Math.sin(radians);
-
-        // Path: to create needle shape (triangle). Initial coordinates of two of the triangle corners plus the third calculated end tip that points to the appropriate segment on the gauge 
-        // M aX aY L bX bY L cX cY Z
-        var mainPath = 'M -.0 -0.025 L .0 0.025 L ',
-            cX = String(x),
-            cY = String(y),
-            pathEnd = ' Z';
-        var path = mainPath + cX + " " + cY + pathEnd;
-
-        gaugeColors = ['rgb(8,29,88)', 'rgb(37,52,148)', 'rgb(34,94,168)', 'rgb(29,145,192)', 'rgb(65,182,196)', 'rgb(127,205,187)', 'rgb(199,233,180)', 'rgb(237,248,217)', 'rgb(255,255,217)', 'white']
-
-        // create a trace to draw the circle where the needle is centered
-        var traceNeedleCenter = {
-            type: 'scatter',
-            showlegend: false,
-            x: [0],
-            y: [0],
-            marker: { size: 35, color: '850000' },
-            name: wfreq,
-            hoverinfo: 'name'
-        };
-
-        // create a data array from the two traces
-        var dataGauge = [traceGauge, traceNeedleCenter];
-
-        // define a layout for the chart
-        var layoutGauge = {
-
-            // draw the needle pointer shape using path defined above
-            shapes: [{
-                type: 'path',
-                path: path,
-                fillcolor: '850000',
-                line: {
-                    color: '850000'
-                }
-            }],
-            font: {
-                family: 'Quicksand'
-            },
-            hoverlabel: {
-                font: {
-                    family: 'Quicksand',
-                    size: 16
-                }
-            },
-            title: {
-                text: `<b>Test Subject ${id}</b><br><b>Belly Button Washing Frequency</b><br><br>Scrubs per Week`,
-                font: {
-                    size: 18,
-                    color: 'rgb(34,94,168)'
-                },
-            },
-            height: 500,
-            width: 500,
-            xaxis: {
-                zeroline: false,
-                showticklabels: false,
-                showgrid: false,
-                range: [-1, 1],
-                fixedrange: true // disable zoom
-            },
-            yaxis: {
-                zeroline: false,
-                showticklabels: false,
-                showgrid: false,
-                range: [-0.5, 1.5],
-                fixedrange: true // disable zoom
-            }
-        };
-
-        // plot the gauge chart
-        Plotly.newPlot('gauge', dataGauge, layoutGauge);
-
-
     })); // close .then function
 
 }; // close setPlot() function
