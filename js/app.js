@@ -125,7 +125,7 @@ function setPlot(id) {
             type: 'bar',
             orientation: 'h',
             marker: {
-                color: 'rgb(77, 191, 254)'
+                color: 'rgb(258, 16, 81)'
             }
         };
 
